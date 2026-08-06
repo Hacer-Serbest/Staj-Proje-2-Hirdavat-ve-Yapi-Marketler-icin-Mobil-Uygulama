@@ -1,0 +1,30 @@
+databases:
+  - name: hirdavat-db
+    plan: free
+    databaseName: hirdavat
+    user: hirdavat
+
+services:
+  - type: web
+    name: hirdavat-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/docs/
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.production
+      - key: ALLOWED_HOSTS
+        value: hirdavat-api.onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://hirdavat-app.vercel.app
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hirdavat-db
+          property: connectionString
