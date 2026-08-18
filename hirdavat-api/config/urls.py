@@ -32,5 +32,6 @@ urlpatterns = [
     path('api/docs.json', schema_view.without_ui(cache_timeout=0), name='schema-json'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# whitenoise sadece STATIC_ROOT'u servis eder; MEDIA_ROOT (ürün fotoğrafları) için
+# DEBUG=False iken de bu route gerekli, yoksa yüklenen görseller hiç görüntülenemez.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

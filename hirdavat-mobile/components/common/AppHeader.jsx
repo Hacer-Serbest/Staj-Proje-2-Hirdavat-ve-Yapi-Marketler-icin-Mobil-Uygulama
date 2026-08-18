@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -26,9 +27,15 @@ export default function AppHeader() {
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
       <View style={styles.row}>
-        <View style={styles.avatar}>
+        <LinearGradient
+          colors={['#1e3355', '#243b5e', '#64748b']}
+          locations={[0, 0.6, 1]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.avatar}
+        >
           <Text style={styles.avatarText}>{avatarLetter}</Text>
-        </View>
+        </LinearGradient>
 
         <View style={{ flex: 1 }}>
           <Text style={styles.greeting}>Merhaba,</Text>
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255,255,255,0.22)',
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
   },
